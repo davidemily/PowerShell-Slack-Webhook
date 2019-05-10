@@ -1,17 +1,23 @@
 Param(
-	[string]$Channel,
-	[string]$Username,
-	[string]$Message,
-	[string]$Webhook
+	[Parameter(Mandatory=$True)]
+	[ValidateNotNullOrEmpty()]
+	[string]$channel,
+		
+	[Parameter(Mandatory=$True)]
+	[ValidateNotNullOrEmpty()]
+	[string]$message,
+	
+	[Parameter(Mandatory=$True)]
+	[ValidateNotNullOrEmpty()]
+	[string]$webhook
 )
 
 $payload = @{
- "channel" = $Channel
-  "text" = $Message
-  "username"= $Username
+ "channel" = $channel
+  "text" = $message
 }
  
 Invoke-WebRequest -UseBasicParsing `
  -Body (ConvertTo-Json -Compress -InputObject $payload) `
  -Method Post `
- -Uri $Webhook
+ -Uri $webhook
