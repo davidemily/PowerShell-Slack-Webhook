@@ -9,7 +9,7 @@ Param(
 	
 	[Parameter(Mandatory=$True)]
 	[ValidateNotNullOrEmpty()]
-	[string]$webhook
+	[string]$webhookUri
 )
 
 $payload = @{
@@ -20,4 +20,4 @@ $payload = @{
 Invoke-WebRequest -UseBasicParsing `
  -Body (ConvertTo-Json -Compress -InputObject $payload) `
  -Method Post `
- -Uri $webhook
+ -Uri $webhookUri
